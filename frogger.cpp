@@ -76,7 +76,20 @@ int main()
         if (truck3.getPosition().x>window.getSize().x)
         {
             truck3.setPosition(sf::Vector2f(-120.0f,350.0f));
-        }             
+        } 
+        //accident
+        if (frog.getGlobalBounds().intersects(truck1.getGlobalBounds()))
+        {
+            window.close();
+        } 
+        if (frog.getGlobalBounds().intersects(truck2.getGlobalBounds()))
+        {
+            window.close();
+        }
+        if (frog.getGlobalBounds().intersects(truck3.getGlobalBounds()))
+        {
+            window.close();
+        }           
         //update the game
         window.clear();
         window.draw(start_bar);
