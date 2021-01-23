@@ -10,6 +10,7 @@ int main()
     sf::RectangleShape truck1;
     sf::RectangleShape truck2;
     sf::RectangleShape truck3;
+    sf::RectangleShape frog;
     start_bar.setSize(sf::Vector2f(450.0,50.0));
     start_bar.setPosition(sf::Vector2f(0.0f,400.0f));
     middle_bar.setSize(sf::Vector2f(450.0,50.0));
@@ -25,6 +26,9 @@ int main()
     truck3.setSize(sf::Vector2f(120,50));
     truck3.setFillColor(sf::Color::Red);
     truck3.setPosition(sf::Vector2f(0.0,350.0));
+    frog.setSize(sf::Vector2f(50.0f,50.0f));
+    frog.setPosition(sf::Vector2f(frog.getPosition().x,window.getSize().y-frog.getSize().y));
+    frog.setFillColor(sf::Color::Green);   
 
     //functions
     while (window.isOpen())
@@ -36,7 +40,24 @@ int main()
             {
             case sf::Event::Closed:
                 window.close();
-                break;            
+                break; 
+            case sf::Event::KeyReleased:
+                if (sf::Keyboard::Key::Left==event.key.code)
+                {
+                    frog.move(-20,0);
+                }
+                if (sf::Keyboard::Key::Right==event.key.code)
+                {
+                    frog.move(20,0);
+                }
+                if (sf::Keyboard::Key::Up==event.key.code)
+                {
+                    frog.move(0,-50);
+                }
+                if (sf::Keyboard::Key::Down==event.key.code)
+                {
+                    frog.move(0,50);
+                }                             
             default:
                 break;
             }
@@ -64,6 +85,7 @@ int main()
         window.draw(truck1);
         window.draw(truck2);
         window.draw(truck3);
+        window.draw(frog);
         window.display();
     }
 
