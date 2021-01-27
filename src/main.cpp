@@ -24,22 +24,22 @@ int main()
 {
     RenderWindow window(VideoMode(700, 650), "Frogger");
     Manager background;
-    background.CreatSprite("./Asset/Image/Background.png", 700.0, 650.0);
+    background.CreatSprite("../Asset/Image/Background.png", 700.0, 650.0);
 
     Manager frog;
-    frog.CreatSprite("./Asset/Image/Frog.png", 50.0, 50.0);
+    frog.CreatSprite("../Asset/Image/Frog.png", 50.0, 50.0);
     frog.Shape.setPosition(Vector2f(frog.Shape.getPosition().x, window.getSize().y - frog.Shape.getSize().y));
 
     Manager car1, car2, car3, car4, truck;
-    car1.CreatSprite("./Asset/Image/Car1.png", 70.0, 50.0);
+    car1.CreatSprite("../Asset/Image/Car1.png", 70.0, 50.0);
     car1.Shape.setPosition(Vector2f(700.0, 350.0));
-    car2.CreatSprite("./Asset/Image/Car2.png", 80.0, 50.0);
+    car2.CreatSprite("../Asset/Image/Car2.png", 80.0, 50.0);
     car2.Shape.setPosition(Vector2f(700.0, 400.0));
-    car3.CreatSprite("./Asset/Image/Car3.png", 80.0, 50.0);
+    car3.CreatSprite("../Asset/Image/Car3.png", 80.0, 50.0);
     car3.Shape.setPosition(Vector2f(0.0, 450.0));
-    car4.CreatSprite("./Asset/Image/Car4.png", 70.0, 50.0);
+    car4.CreatSprite("../Asset/Image/Car4.png", 70.0, 50.0);
     car4.Shape.setPosition(Vector2f(0.0, 500.0));
-    truck.CreatSprite("./Asset/Image/Truck.png", 130.0, 50.0);
+    truck.CreatSprite("../Asset/Image/Truck.png", 130.0, 50.0);
     truck.Shape.setPosition(Vector2f(700.0, 550.0));
 
     while (window.isOpen())
