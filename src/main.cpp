@@ -12,7 +12,7 @@ public:
 void Manager::CreatSprite(string const &FileName, float X, float Y)
 {
     static int count = 0;
-    static Texture texture[11];
+    static Texture texture[12];
     texture[count].loadFromFile(FileName);
     Shape.setSize(Vector2f(X, Y));
     Shape.setTexture(&texture[count]);
@@ -22,31 +22,25 @@ void Manager::CreatSprite(string const &FileName, float X, float Y)
 }
 int main()
 {
-    RenderWindow window(VideoMode(800, 450), "Frogger");
-    RectangleShape start_bar;
-    RectangleShape middle_bar;
-    RectangleShape finish_bar;
-    start_bar.setSize(Vector2f(800.0, 50.0));
-    start_bar.setPosition(Vector2f(0.0f, 400.0f));
-    middle_bar.setSize(Vector2f(800.0, 50.0));
-    middle_bar.setPosition(Vector2f(0.0f, 200.0f));
-    finish_bar.setSize(Vector2f(800.0, 50.0));
-    finish_bar.setPosition(Vector2f(0.0f, 0.0f));
+    RenderWindow window(VideoMode(700, 650), "Frogger");
+    Manager background;
+    background.CreatSprite("./Asset/Image/Background.png", 700.0, 650.0);
+
     Manager frog;
-    frog.CreatSprite("Asset/Image/Frog.png", 25.0, 25.0);
+    frog.CreatSprite("./Asset/Image/Frog.png", 50.0, 50.0);
     frog.Shape.setPosition(Vector2f(frog.Shape.getPosition().x, window.getSize().y - frog.Shape.getSize().y));
 
     Manager car1, car2, car3, car4, truck;
-    car1.CreatSprite("Asset/Image/Car1.png", 25.0, 25.0);
-    car1.Shape.setPosition(Vector2f(800.0, 250.0));
-    car2.CreatSprite("Asset/Image/Car2.png", 40.0, 25.0);
-    car2.Shape.setPosition(Vector2f(0.0, 275.0));
-    car3.CreatSprite("Asset/Image/Car3.png", 25.0, 25.0);
-    car3.Shape.setPosition(Vector2f(800.0, 300.0));
-    car4.CreatSprite("Asset/Image/Car4.png", 40.0, 25.0);
-    car4.Shape.setPosition(Vector2f(0.0, 325.0));
-    truck.CreatSprite("Asset/Image/Truck.png", 40.0, 25.0);
-    truck.Shape.setPosition(Vector2f(800.0, 350.0));
+    car1.CreatSprite("./Asset/Image/Car1.png", 70.0, 50.0);
+    car1.Shape.setPosition(Vector2f(700.0, 350.0));
+    car2.CreatSprite("./Asset/Image/Car2.png", 80.0, 50.0);
+    car2.Shape.setPosition(Vector2f(700.0, 400.0));
+    car3.CreatSprite("./Asset/Image/Car3.png", 80.0, 50.0);
+    car3.Shape.setPosition(Vector2f(0.0, 450.0));
+    car4.CreatSprite("./Asset/Image/Car4.png", 70.0, 50.0);
+    car4.Shape.setPosition(Vector2f(0.0, 500.0));
+    truck.CreatSprite("./Asset/Image/Truck.png", 130.0, 50.0);
+    truck.Shape.setPosition(Vector2f(700.0, 550.0));
 
     while (window.isOpen())
     {
@@ -78,29 +72,29 @@ int main()
             }
         }
         car1.Shape.move(-0.05, 0.0);
-        car2.Shape.move(0.02, 0.0);
-        car3.Shape.move(-0.05, 0.0);
+        car2.Shape.move(-0.02, 0.0);
+        car3.Shape.move(0.05, 0.0);
         car4.Shape.move(0.02, 0.0);
         truck.Shape.move(-0.05, 0.0);
-        if (car1.Shape.getPosition().x > window.getSize().x)
+        if (car1.Shape.getPosition().x < -70)
         {
-            car1.Shape.setPosition(Vector2f(800.0f, 250.0f));
+            car1.Shape.setPosition(Vector2f(770.0f, 350.0f));
         }
-        if (car2.Shape.getPosition().x < -200)
+        if (car2.Shape.getPosition().x < -80)
         {
-            car2.Shape.setPosition(Vector2f(0.0f, 275.0f));
+            car2.Shape.setPosition(Vector2f(780.0f, 400.0f));
         }
-        if (car3.Shape.getPosition().x > window.getSize().x)
+        if (car3.Shape.getPosition().x > 700)
         {
-            car3.Shape.setPosition(Vector2f(800.0f, 300.0f));
+            car3.Shape.setPosition(Vector2f(-80.0f, 450.0f));
         }
-        if (car4.Shape.getPosition().x < -200)
+        if (car4.Shape.getPosition().x > 700)
         {
-            car4.Shape.setPosition(Vector2f(0.0f, 325.0f));
+            car4.Shape.setPosition(Vector2f(-70.0f, 500.0f));
         }
-        if (truck.Shape.getPosition().x > window.getSize().x)
+        if (truck.Shape.getPosition().x < -130)
         {
-            truck.Shape.setPosition(Vector2f(800.0f, 350.0f));
+            truck.Shape.setPosition(Vector2f(730.0f, 550.0f));
         }
         //accident
         if (frog.Shape.getGlobalBounds().intersects(car1.Shape.getGlobalBounds()))
@@ -125,9 +119,7 @@ int main()
         }
         //update the game
         window.clear();
-        window.draw(start_bar);
-        window.draw(middle_bar);
-        window.draw(finish_bar);
+        window.draw(background.Shape);
         window.draw(frog.Shape);
         window.draw(car1.Shape);
         window.draw(car2.Shape);
