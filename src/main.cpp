@@ -12,7 +12,7 @@ public:
 void Manager::CreatSprite(string const &FileName, float X, float Y)
 {
     static int count = 0;
-    static Texture texture[11];
+    static Texture texture[12];
     texture[count].loadFromFile(FileName);
     Shape.setSize(Vector2f(X, Y));
     Shape.setTexture(&texture[count]);
@@ -23,15 +23,9 @@ void Manager::CreatSprite(string const &FileName, float X, float Y)
 int main()
 {
     RenderWindow window(VideoMode(700, 650), "Frogger");
-    RectangleShape start_bar;
-    RectangleShape middle_bar;
-    RectangleShape finish_bar;
-    start_bar.setSize(Vector2f(700.0, 50.0));
-    start_bar.setPosition(Vector2f(0.0f, 600.0f));
-    middle_bar.setSize(Vector2f(700.0, 50.0));
-    middle_bar.setPosition(Vector2f(0.0f, 300.0f));
-    finish_bar.setSize(Vector2f(700.0, 50.0));
-    finish_bar.setPosition(Vector2f(0.0f, 0.0f));
+    Manager background;
+    background.CreatSprite("../Asset/Image/Background.png", 700.0, 650.0);
+
     Manager frog;
     frog.CreatSprite("../Asset/Image/Frog.png", 50.0, 50.0);
     frog.Shape.setPosition(Vector2f(frog.Shape.getPosition().x, window.getSize().y - frog.Shape.getSize().y));
@@ -90,7 +84,7 @@ int main()
         {
             car2.Shape.setPosition(Vector2f(780.0f, 400.0f));
         }
-        if (car3.Shape.getPosition().x >700 )
+        if (car3.Shape.getPosition().x > 700)
         {
             car3.Shape.setPosition(Vector2f(-80.0f, 450.0f));
         }
@@ -98,7 +92,7 @@ int main()
         {
             car4.Shape.setPosition(Vector2f(-70.0f, 500.0f));
         }
-        if (truck.Shape.getPosition().x <-130)
+        if (truck.Shape.getPosition().x < -130)
         {
             truck.Shape.setPosition(Vector2f(730.0f, 550.0f));
         }
@@ -125,9 +119,7 @@ int main()
         }
         //update the game
         window.clear();
-        window.draw(start_bar);
-        window.draw(middle_bar);
-        window.draw(finish_bar);
+        window.draw(background.Shape);
         window.draw(frog.Shape);
         window.draw(car1.Shape);
         window.draw(car2.Shape);
