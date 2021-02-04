@@ -27,7 +27,7 @@ int main()
     background.CreatSprite("../Asset/Image/Background.png", 700.0, 650.0);
 
     Manager frog;
-    frog.CreatSprite("../Asset/Image/Frog.png", 50.0, 50.0);
+    frog.CreatSprite("../Asset/Image/FrogUp.png", 50.0, 50.0);
     frog.Shape.setPosition(Vector2f(frog.Shape.getPosition().x, window.getSize().y - frog.Shape.getSize().y));
 
     Manager car1, car2, car3, car4, truck;
@@ -53,21 +53,25 @@ int main()
                 window.close();
                 break;
             case Event::KeyReleased:
-                if (Keyboard::Key::Left == event.key.code)
+                if (Keyboard::Key::Left == event.key.code && frog.Shape.getPosition().x > 0)
                 {
-                    frog.Shape.move(-20, 0);
+                    frog.Shape.move(-25, 0);
+                    frog.CreatSprite("../Asset/Image/FrogLeft.png", 50.0, 50.0);
                 }
-                if (Keyboard::Key::Right == event.key.code)
+                if (Keyboard::Key::Right == event.key.code && frog.Shape.getPosition().x+frog.Shape.getSize().x < window.getSize().x)
                 {
-                    frog.Shape.move(20, 0);
+                    frog.Shape.move(25, 0);
+                    frog.CreatSprite("../Asset/Image/FrogRight.png", 50.0, 50.0);
                 }
-                if (Keyboard::Key::Up == event.key.code)
+                if (Keyboard::Key::Up == event.key.code && frog.Shape.getPosition().y > 0)
                 {
                     frog.Shape.move(0, -50);
+                    frog.CreatSprite("../Asset/Image/FrogUp.png", 50.0, 50.0);
                 }
-                if (Keyboard::Key::Down == event.key.code)
+                if (Keyboard::Key::Down == event.key.code && frog.Shape.getPosition().y+frog.Shape.getSize().y < window.getSize().y)
                 {
                     frog.Shape.move(0, 50);
+                    frog.CreatSprite("../Asset/Image/FrogDown.png", 50.0, 50.0);
                 }
             }
         }
