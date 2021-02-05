@@ -8,15 +8,10 @@ class Manager
 public:
     RectangleShape Shape;
     void CreatSprite(string const &FileName, float X, float Y);
-    void Loop(Manager *manager, float X, float Y);
     void Accident(RenderWindow &window, Manager frog, Manager cars[], int n_cars);
     int Drown(RenderWindow &window, Manager frog, Manager woods[], int n_woods);
     void Move(float v_x, float v_y);
 };
-void Manager::Move(float v_x, float v_y)
-{
-    Shape.move(v_x, v_y);
-}
 void Manager::CreatSprite(string const &FileName, float X, float Y)
 {
     static int count = 0;
@@ -27,13 +22,6 @@ void Manager::CreatSprite(string const &FileName, float X, float Y)
     Sprite sprite;
     sprite.setTexture(texture[count]);
     count++;
-}
-void Manager::Loop(Manager *manager, float X, float Y)
-{
-    if (manager->Shape.getPosition().x > 700 || manager->Shape.getPosition().x < 0)
-    {
-        manager->Shape.setPosition(Vector2f(X, Y));
-    }
 }
 void Manager::Accident(RenderWindow &window, Manager frog, Manager cars[], int n_cars)
 {
@@ -64,6 +52,18 @@ int Manager::Drown(RenderWindow &window, Manager frog, Manager woods[], int n_wo
         window.close();
     }  
     return -1;
+}
+void Manager::Move(float v_x, float v_y)
+{
+    Shape.move(v_x, v_y);
+    if (v_x > 0 && Shape.getPosition().x>700)
+    {
+        Shape.setPosition(Vector2f(-Shape.getSize().x, Shape.getPosition().y));
+    }
+    else if (v_x < 0 && Shape.getPosition().x < -Shape.getSize().x)
+    {
+        Shape.setPosition(Vector2f(700+Shape.getSize().x, Shape.getPosition().y));
+    }
 }
 
 int main()
@@ -145,27 +145,6 @@ int main()
         wood3.Move(velocity_woods[2], 0.0);
         wood4.Move(velocity_woods[3], 0.0);
         wood5.Move(velocity_woods[4], 0.0);
-        Manager *ptr[10];
-        ptr[0] = &car1;
-        car1.Loop(ptr[0], 700, 550);
-        ptr[1] = &car2;
-        car2.Loop(ptr[1], 0, 500);
-        ptr[2] = &car3;
-        car3.Loop(ptr[2], 700, 450);
-        ptr[3] = &car4;
-        car4.Loop(ptr[3], 0, 400);
-        ptr[4] = &truck;
-        truck.Loop(ptr[4], 700, 350);
-        ptr[5] = &wood1;
-        wood1.Loop(ptr[5], 700, 250);
-        ptr[6] = &wood2;
-        wood2.Loop(ptr[6], 0, 200);
-        ptr[7] = &wood3;
-        wood3.Loop(ptr[7], 0, 150);
-        ptr[8] = &wood4;
-        wood4.Loop(ptr[8], 700, 100);
-        ptr[9] = &wood5;
-        wood5.Loop(ptr[9], 0, 50);
 
         //accident and drown
         int n_cars = 5;
