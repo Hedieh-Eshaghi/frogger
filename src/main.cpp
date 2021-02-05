@@ -10,8 +10,13 @@ public:
     void CreatSprite(string const &FileName, float X, float Y);
     void Loop(Manager *manager, float X, float Y);
     void Accident(RenderWindow &window, Manager frog, Manager cars[], int n_cars);
-    void Drown(RenderWindow &window, Manager frog, Manager woods[], int n_woods);
+    int Drown(RenderWindow &window, Manager frog, Manager woods[], int n_woods);
+    void Move(float v_x, float v_y);
 };
+void Manager::Move(float v_x, float v_y)
+{
+    Shape.move(v_x, v_y);
+}
 void Manager::CreatSprite(string const &FileName, float X, float Y)
 {
     static int count = 0;
@@ -40,7 +45,7 @@ void Manager::Accident(RenderWindow &window, Manager frog, Manager cars[], int n
         }
     }
 }
-void Manager::Drown(RenderWindow &window, Manager frog, Manager woods[], int n_woods)
+int Manager::Drown(RenderWindow &window, Manager frog, Manager woods[], int n_woods)
 {
     int s=0;
     for (int i = 0; i < n_woods; i++)
@@ -49,6 +54,7 @@ void Manager::Drown(RenderWindow &window, Manager frog, Manager woods[], int n_w
         {
             if (woods[i].Shape.getGlobalBounds().contains(frog.Shape.getPosition().x+49, frog.Shape.getPosition().y+49))
             {
+                return i;
                 s++;
             }
         }
@@ -57,6 +63,7 @@ void Manager::Drown(RenderWindow &window, Manager frog, Manager woods[], int n_w
     {
         window.close();
     }  
+    return -1;
 }
 
 int main()
@@ -126,16 +133,18 @@ int main()
                 }
             }
         }
-        car1.Shape.move(-0.5, 0.0);
-        car2.Shape.move(0.2, 0.0);
-        car3.Shape.move(-0.5, 0.0);
-        car4.Shape.move(0.2, 0.0);
-        truck.Shape.move(-0.5, 0.0);
-        wood1.Shape.move(-0.1, 0.0);
-        wood2.Shape.move(0.1, 0.0);
-        wood3.Shape.move(0.5, 0.0);
-        wood4.Shape.move(-0.2, 0.0);
-        wood5.Shape.move(0.5, 0.0);
+        float velocity_cars[] = {-0.5,0.2,-0.5,0.2,-0.5};
+        float velocity_woods[] = {-0.1,0.1,0.5,-0.2,0.5};
+        car1.Move(velocity_cars[0], 0.0);
+        car2.Move(velocity_cars[1], 0.0);
+        car3.Move(velocity_cars[2], 0.0);
+        car4.Move(velocity_cars[3], 0.0);
+        truck.Move(velocity_cars[4], 0.0);
+        wood1.Move(velocity_woods[0], 0.0);
+        wood2.Move(velocity_woods[1], 0.0);
+        wood3.Move(velocity_woods[2], 0.0);
+        wood4.Move(velocity_woods[3], 0.0);
+        wood5.Move(velocity_woods[4], 0.0);
         Manager *ptr[10];
         ptr[0] = &car1;
         car1.Loop(ptr[0], 700, 550);
@@ -160,11 +169,14 @@ int main()
 
         //accident and drown
         int n_cars = 5;
-        Manager cars[]={car1,car2, car3, car4, truck};
+        Manager cars[]={car1,car2,car3,car4,truck};
         frog.Accident(window,frog,cars,n_cars);
         int n_woods = 5;
         Manager woods[]={wood1,wood2,wood3,wood4,wood5};
-        frog.Drown(window,frog,woods,n_woods);
+        int wood_number = -1;
+        wood_number = frog.Drown(window,frog,woods,n_woods);
+        if (wood_number>-1) frog.Shape.move(velocity_woods[wood_number],0.0);
+        
 
         //update the game
         window.clear();
