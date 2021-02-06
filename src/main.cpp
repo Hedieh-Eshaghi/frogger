@@ -140,11 +140,35 @@ int main()
     Home5.Shape.setPosition(Vector2f(615.0, 0.0));
 
     Manager Heart;
-    Heart.CreatSprite("../Asset/Image/Heart3.png", 350.0, 50.0);
-    Heart.Shape.setPosition(Vector2f(350.0, 650.0));
+    Heart.CreatSprite("../Asset/Image/Heart3.png", 50.0, 50.0);
+    Heart.Shape.setPosition(Vector2f(window.getSize().x - Heart.Shape.getSize().x, window.getSize().y - Heart.Shape.getSize().y));
+
+    RectangleShape TimeBar;
+    TimeBar.setSize(Vector2f(200.0f, 15.0f));
+    TimeBar.setPosition(Vector2f(60.0f, 670.0f));
+    TimeBar.setFillColor(Color::White);
+    Font font;
+    font.loadFromFile("../Asset/Font/COOPBL.TTF");
+    Text time("TIME", font);
+    time.setFillColor(Color::Red);
+    time.setPosition(Vector2f(0.0f, 665.0f));
+    time.setCharacterSize(20);
+    RectangleShape BlackBar;
+    BlackBar.setSize(Vector2f(200.0f, 15.0f));
+    BlackBar.setPosition(Vector2f(260.0f, 670.0f));
+    BlackBar.setFillColor(Color::Black);
+    Time elapsedTime, deltaTime;
+    Clock clock;
+
     while (window.isOpen())
     {
-        sf::Event event;
+        deltaTime = clock.restart();
+        elapsedTime += deltaTime;
+        float AsSeconds = elapsedTime.asSeconds();
+        BlackBar.setPosition(Vector2f(260.0f - AsSeconds, 670.0f));
+        if (elapsedTime > seconds(40))
+            window.close();
+        Event event;
         while (window.pollEvent(event))
         {
             switch (event.type)
@@ -243,11 +267,11 @@ int main()
         if (change_heart > 0)
         {
             if (heart == 3)
-                Heart.CreatSprite("../Asset/Image/Heart3.png", 350.0, 50.0);
+                Heart.CreatSprite("../Asset/Image/Heart3.png", 50.0, 50.0);
             else if (heart == 2)
-                Heart.CreatSprite("../Asset/Image/Heart2.png", 350.0, 50.0);
+                Heart.CreatSprite("../Asset/Image/Heart2.png", 50.0, 50.0);
             else if (heart == 1)
-                Heart.CreatSprite("../Asset/Image/Heart1.png", 350.0, 50.0);
+                Heart.CreatSprite("../Asset/Image/Heart1.png", 50.0, 50.0);
         }
 
         //update the game
@@ -261,6 +285,9 @@ int main()
         for (int i = 0; i < n_homes; i++)
             window.draw(homes[i].Shape);
         window.draw(Heart.Shape);
+        window.draw(TimeBar);
+        window.draw(BlackBar);
+        window.draw(time);
         window.display();
     }
     return 0;
