@@ -103,29 +103,49 @@ int main()
     soundbuffer.loadFromFile("../Asset/Sound/sound-frogger-plunk.wav");
     sound.setBuffer(soundbuffer);
 
-    Manager car1, car2, car3, car4, truck;
+    Manager car1, car2, car3, car4, truck, car5 , car6, car7, car8, car9 ,truck1;
     car1.CreatSprite("../Asset/Image/Car1.png", 70.0, 50.0);
-    car1.Shape.setPosition(Vector2f(700.0, 550.0));
+    car1.Shape.setPosition(Vector2f(300.0, 550.0));
     car2.CreatSprite("../Asset/Image/Car2.png", 70.0, 50.0);
-    car2.Shape.setPosition(Vector2f(0.0, 500.0));
+    car2.Shape.setPosition(Vector2f(200.0, 500.0));
     car3.CreatSprite("../Asset/Image/Car3.png", 80.0, 50.0);
-    car3.Shape.setPosition(Vector2f(700.0, 450.0));
+    car3.Shape.setPosition(Vector2f(400.0, 450.0));
     car4.CreatSprite("../Asset/Image/Car4.png", 80.0, 50.0);
     car4.Shape.setPosition(Vector2f(0.0, 400.0));
     truck.CreatSprite("../Asset/Image/Truck.png", 130.0, 50.0);
-    truck.Shape.setPosition(Vector2f(700.0, 350.0));
+    truck.Shape.setPosition(Vector2f(500.0, 350.0));
+    car5.CreatSprite("../Asset/Image/Car1.png", 70.0, 50.0);
+    car5.Shape.setPosition(Vector2f(0.0, 550.0));
+    car6.CreatSprite("../Asset/Image/Car2.png", 70.0, 50.0);
+    car6.Shape.setPosition(Vector2f(500.0, 500.0));
+    car7.CreatSprite("../Asset/Image/Car3.png", 80.0, 50.0);
+    car7.Shape.setPosition(Vector2f(100.0, 450.0));
+    car8.CreatSprite("../Asset/Image/Car4.png", 80.0, 50.0);
+    car8.Shape.setPosition(Vector2f(300.0, 400.0));
+    truck1.CreatSprite("../Asset/Image/Truck.png", 130.0, 50.0);
+    truck1.Shape.setPosition(Vector2f(200.0, 350.0));
 
-    Manager wood1, wood2, wood3, wood4, wood5;
+    Manager wood1, wood2, wood3, wood4, wood5 ,wood6, wood7 , wood8 ,wood9,wood10;
     wood1.CreatSprite("../Asset/Image/Wood.png", 150.0, 50.0);
-    wood1.Shape.setPosition(Vector2f(700.0, 250.0));
+    wood1.Shape.setPosition(Vector2f(300.0, 250.0));
     wood2.CreatSprite("../Asset/Image/Wood.png", 120.0, 50.0);
-    wood2.Shape.setPosition(Vector2f(0.0, 200.0));
+    wood2.Shape.setPosition(Vector2f(200.0, 200.0));
     wood3.CreatSprite("../Asset/Image/Wood.png", 150.0, 50.0);
-    wood3.Shape.setPosition(Vector2f(00.0, 150.0));
+    wood3.Shape.setPosition(Vector2f(400.0, 150.0));
     wood4.CreatSprite("../Asset/Image/Wood.png", 130.0, 50.0);
-    wood4.Shape.setPosition(Vector2f(700.0, 100.0));
+    wood4.Shape.setPosition(Vector2f(0.0, 100.0));
     wood5.CreatSprite("../Asset/Image/Wood.png", 140.0, 50.0);
-    wood5.Shape.setPosition(Vector2f(0.0, 50.0));
+    wood5.Shape.setPosition(Vector2f(500.0, 50.0));
+    wood6.CreatSprite("../Asset/Image/Wood.png", 150.0, 50.0);
+    wood6.Shape.setPosition(Vector2f(0.0, 250.0));
+    wood7.CreatSprite("../Asset/Image/Wood.png", 120.0, 50.0);
+    wood7.Shape.setPosition(Vector2f(500.0, 200.0));
+    wood8.CreatSprite("../Asset/Image/Wood.png", 150.0, 50.0);
+    wood8.Shape.setPosition(Vector2f(100.0, 150.0));
+    wood9.CreatSprite("../Asset/Image/Wood.png", 130.0, 50.0);
+    wood9.Shape.setPosition(Vector2f(300.0, 100.0));
+    wood10.CreatSprite("../Asset/Image/Wood.png", 140.0, 50.0);
+    wood10.Shape.setPosition(Vector2f(200.0, 50.0));
 
     Manager Home1, Home2, Home3, Home4, Home5;
     Home1.CreatSprite("../Asset/Image/Home.png", 70.0, 50.0);
@@ -179,31 +199,41 @@ int main()
                 }
             }
         }
-        float velocity_cars[] = {-0.5, 0.2, -0.5, 0.2, -0.5};
-        float velocity_woods[] = {-0.1, 0.1, 0.1, -0.1, 0.1};
+        float velocity_cars[] = {-0.1,0.1,-0.2,0.2,-0.1};
+        float velocity_woods[] = {0.1,-0.1,0.2,-0.2,0.1,0.1,-0.1,0.2,-0.2,0.1};
         car1.Move(velocity_cars[0], 0.0);
         car2.Move(velocity_cars[1], 0.0);
         car3.Move(velocity_cars[2], 0.0);
         car4.Move(velocity_cars[3], 0.0);
         truck.Move(velocity_cars[4], 0.0);
+        car5.Move(velocity_cars[0], 0.0);
+        car6.Move(velocity_cars[1], 0.0);
+        car7.Move(velocity_cars[2], 0.0);
+        car8.Move(velocity_cars[3], 0.0);
+        truck1.Move(velocity_cars[4], 0.0);
         wood1.Move(velocity_woods[0], 0.0);
         wood2.Move(velocity_woods[1], 0.0);
         wood3.Move(velocity_woods[2], 0.0);
         wood4.Move(velocity_woods[3], 0.0);
         wood5.Move(velocity_woods[4], 0.0);
+        wood6.Move(velocity_woods[0], 0.0);
+        wood7.Move(velocity_woods[1], 0.0);
+        wood8.Move(velocity_woods[2], 0.0);
+        wood9.Move(velocity_woods[3], 0.0);
+        wood10.Move(velocity_woods[4], 0.0);
 
         //accident, drown and home
         int change_heart = 0;
-        int n_cars = 5;
-        Manager cars[] = {car1, car2, car3, car4, truck};
+        int n_cars = 10;
+        Manager cars[]={car1,car2,car3,car4,truck, car5,car6,car7,car8, car9, truck1};
         int f_a = frog.Accident(window, frog, cars, n_cars);
         if (f_a == -2)
         {
             frog.Shape.setPosition(Vector2f(frog.Shape.getPosition().x, window.getSize().y - 50 - frog.Shape.getSize().y));
             change_heart++;
         }
-        int n_woods = 5;
-        Manager woods[] = {wood1, wood2, wood3, wood4, wood5};
+        int n_woods = 10;
+        Manager woods[]={wood1,wood2,wood3,wood4,wood5,wood6,wood7,wood8,wood9,wood10};
         int wood_number = -1;
         wood_number = frog.Drown(window, frog, woods, n_woods);
         if (wood_number == -2)
@@ -250,26 +280,7 @@ int main()
                 Heart.CreatSprite("../Asset/Image/Heart1.png", 350.0, 50.0);
         }
 
-        //accident, drown and home
         
-        
-        frog.Accident(window,frog,cars,n_cars);
-        
-        
-        
-        wood_number = frog.Drown(window,frog,woods,n_woods);
-        if (wood_number>-1) frog.Shape.move(velocity_woods[wood_number],0.0);
-        
-        home_number = frog.CheckHome(window,frog,homes,n_homes);
-        if (home_number>-1){
-            frog.Shape.setPosition(Vector2f(frog.Shape.getPosition().x, window.getSize().y-50 - frog.Shape.getSize().y));
-            if (home_number==0) Home1.CreatSprite("../Asset/Image/FrogWin.png", 70.0, 50.0);
-            else if(home_number==1) Home2.CreatSprite("../Asset/Image/FrogWin.png", 70.0, 50.0);
-            else if(home_number==2) Home3.CreatSprite("../Asset/Image/FrogWin.png", 70.0, 50.0);
-            else if(home_number==3) Home4.CreatSprite("../Asset/Image/FrogWin.png", 70.0, 50.0);
-            else if(home_number==4) Home5.CreatSprite("../Asset/Image/FrogWin.png", 70.0, 50.0);
-            
-        } 
         
         //update the game
         window.clear();
